@@ -41,7 +41,8 @@ Module.register("JIR-calendar", {
 			"'s birthday": ""
 		},
 		broadcastEvents: true,
-		excludedEvents: []
+		excludedEvents: [],
+		requiresVersion: "2.0.0"
 	},
 
 	// Define required scripts.
