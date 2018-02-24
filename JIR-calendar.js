@@ -7,7 +7,7 @@
  * MIT Licensed.
  */
 
-Module.register("calendar", {
+Module.register("JIR-calendar", {
 
 	// Define module defaults
 	defaults: {
@@ -46,12 +46,15 @@ Module.register("calendar", {
 
 	// Define required scripts.
 	getStyles: function () {
-		return ["calendar.css", "font-awesome.css"];
+		return ["JIR-calendar.css"];
 	},
 
 	// Define required scripts.
 	getScripts: function () {
-		return ["moment.js"];
+		return [
+		"moment.js",
+		'https://use.fontawesome.com/releases/v5.0.6/js/all.js'
+		];
 	},
 
 	// Define required translations.
@@ -143,7 +146,7 @@ Module.register("calendar", {
 			if (this.config.displaySymbol) {
 				var symbolWrapper = document.createElement("td");
 				symbolWrapper.className = "symbol align-right";
-				var symbols = this.symbolsForUrl(event.url);
+				var symbols = this.symbolsForEvent(event);
 				if(typeof symbols === "string") {
 					symbols = [symbols];
 				}
@@ -386,6 +389,25 @@ Module.register("calendar", {
 		return this.getCalendarProperty(url, "symbol", this.config.defaultSymbol);
 	},
 
+	/* symbolsForEvent(event)
+	 * Retrieves the symbols for a event url by regex event name
+	 *
+	 * argument event string - event to look for.
+	 *
+	 * return string/array - The Symbols
+	 */
+	symbolsForEvent: function (event) {
+		var symbol = this.getCalendarProperty(event.url, "symbol", this.config.defaultSymbol);
+		for (var e in this.config.customSymbols){
+			var eventSymbol = this.config.customSymbols[e];
+			if(event.title.toLocaleLowerCase().includes(eventSymbol.name.toLocaleLowerCase())){
+				symbol = eventSymbol.symbol;
+			}
+		}
+		return symbol;
+	},
+
+
 	/* colorForUrl(url)
 	 * Retrieves the color for a specific url.
 	 *
@@ -515,7 +537,7 @@ Module.register("calendar", {
 			var calendar = this.calendarData[url];
 			for (var e in calendar) {
 				var event = cloneObject(calendar[e]);
-				event.symbol = this.symbolsForUrl(url);
+				event.symbol = this.symbolsForEvent(event);
 				event.color = this.colorForUrl(url);
 				delete event.url;
 				eventList.push(event);
