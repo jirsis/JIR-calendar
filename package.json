@@ -1,0 +1,24 @@
+{
+  "name": "jir-calendar",
+  "version": "1.0.0",
+  "description": "Custom calendar module to define diferents symbols by event name",
+  "main": "JIR-calendar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jirsis/JIR-calendar.git"
+  },
+  "keywords": [
+    "magicMirror",
+    "calendar",
+    "module"
+  ],
+  "author": "J. Ignacio Reta Sabarrós - jirsis@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jirsis/JIR-calendar/issues"
+  },
+  "homepage": "https://github.com/jirsis/JIR-calendar#readme"
+}
