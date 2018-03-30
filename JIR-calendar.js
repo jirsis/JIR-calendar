@@ -153,7 +153,7 @@ Module.register("JIR-calendar", {
 
 				for(var i = 0; i < symbols.length; i++) {
 					var symbol = document.createElement("span");
-					symbol.className = "fa fa-fw fa-" + symbols[i];
+				    symbol.className = symbols[i];
 					if(i > 0){
 						symbol.style.paddingLeft = "5px";
 					}
