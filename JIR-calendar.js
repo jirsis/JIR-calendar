@@ -1,9 +1,8 @@
-/* global Module */
-
 /* Magic Mirror
- * Module: Calendar
+ * Module: JIR-Calendar
  *
- * By Michael Teeuw http://michaelteeuw.nl
+ * Extended by Iñaki Reta Sabarrós https://github.com/jirsis
+ * Inspired in Michael Teeuw job http://michaelteeuw.nl
  * MIT Licensed.
  */
 
@@ -197,16 +196,19 @@ Module.register("JIR-calendar", {
 			var oneMinute = oneSecond * 60;
 			var oneHour = oneMinute * 60;
 			var oneDay = oneHour * 24;
-			if (event.fullDayEvent) {
+			var eventMoment = moment(event.startDate, "x");
+			var eventDay = eventMoment.format("D [de] MMMM");
+			var eventHour = eventMoment.format("HH:mm")
+			if (event.fullDayEvent) {				
 				if (event.today) {
-					timeWrapper.innerHTML = this.capFirst(this.translate("TODAY"));
+					timeWrapper.innerHTML = this.capFirst(this.translate("TODAY"))+" "+eventDay;
 				} else if (event.startDate - now < oneDay && event.startDate - now > 0) {
-					timeWrapper.innerHTML = this.capFirst(this.translate("TOMORROW"));
+					timeWrapper.innerHTML = this.capFirst(this.translate("TOMORROW"))+" "+eventDay;
 				} else if (event.startDate - now < 2 * oneDay && event.startDate - now > 0) {
 					if (this.translate("DAYAFTERTOMORROW") !== "DAYAFTERTOMORROW") {
-						timeWrapper.innerHTML = this.capFirst(this.translate("DAYAFTERTOMORROW"));
+						timeWrapper.innerHTML = this.capFirst(this.translate("DAYAFTERTOMORROW"))+", "+eventDay;
 					} else {
-						timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+						timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", "+eventDay;
 					}
 				} else {
 					/* Check to see if the user displays absolute or relative dates with their events
@@ -219,12 +221,12 @@ Module.register("JIR-calendar", {
 					if (this.config.timeFormat === "absolute") {
 						if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 							// This event falls within the config.urgency period that the user has set
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay;
 						} else {
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.fullDayEventDateFormat));
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.fullDayEventDateFormat))+", el "+eventDay;
 						}
 					} else {
-						timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+						timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay;
 					}
 				}
 			} else {
@@ -233,10 +235,10 @@ Module.register("JIR-calendar", {
 						// This event is within the next 48 hours (2 days)
 						if (event.startDate - now < this.config.getRelative * oneHour) {
 							// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", a las "+eventHour;
 						} else {
 							// Otherwise just say 'Today/Tomorrow at such-n-such time'
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").calendar());
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").calendar())+", "+eventDay+" a las "+eventHour;
 						}
 					} else {
 						/* Check to see if the user displays absolute or relative dates with their events
@@ -249,12 +251,12 @@ Module.register("JIR-calendar", {
 						if (this.config.timeFormat === "absolute") {
 							if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 								// This event falls within the config.urgency period that the user has set
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay+" a las "+eventHour;
 							} else {
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat));
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat))+" "+eventDay+" a las "+eventHour;
 							}
 						} else {
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay+" a las "+eventHour;
 						}
 					}
 				} else {
@@ -263,9 +265,10 @@ Module.register("JIR-calendar", {
 							fallback: this.translate("RUNNING") + " {timeUntilEnd}",
 							timeUntilEnd: moment(event.endDate, "x").fromNow(true)
 						})
-					);
+					)+" "+eventDay;
 				}
 			}
+
 			//timeWrapper.innerHTML += ' - '+ moment(event.startDate,'x').format('lll');
 			//console.log(event);
 			timeWrapper.className = "time light";
