@@ -136,6 +136,7 @@ Module.register("JIR-calendar", {
 
 		for (var e in events) {
 			var event = events[e];
+			console.log("calendar: "+event);
 			var eventWrapper = document.createElement("tr");
 
 			if (this.config.colored) {
