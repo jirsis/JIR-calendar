@@ -53,7 +53,7 @@ Module.register("JIR-calendar", {
 	getScripts: function () {
 		return [
 		"moment.js",
-		'https://use.fontawesome.com/releases/v5.0.6/js/all.js'
+		'https://use.fontawesome.com/releases/v5.3.1/js/all.js'
 		];
 	},
 
@@ -197,7 +197,7 @@ Module.register("JIR-calendar", {
 			var oneHour = oneMinute * 60;
 			var oneDay = oneHour * 24;
 			var eventMoment = moment(event.startDate, "x");
-			var eventDay = eventMoment.format("D [de] MMMM");
+			var eventDay = eventMoment.format("D [de] MMM");
 			var eventHour = eventMoment.format("HH:mm")
 			if (event.fullDayEvent) {				
 				if (event.today) {
@@ -237,8 +237,8 @@ Module.register("JIR-calendar", {
 							// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", a las "+eventHour;
 						} else {
-							// Otherwise just say 'Today/Tomorrow at such-n-such time'
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").calendar())+", "+eventDay+" a las "+eventHour;
+							// Otherwise just say 'Today/Tomorrow at such-n-such time'						
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format("[este] ddd D [de] MMM [a las] HH[:]mm"));
 						}
 					} else {
 						/* Check to see if the user displays absolute or relative dates with their events
