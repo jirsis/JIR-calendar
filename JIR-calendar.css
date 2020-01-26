@@ -5,19 +5,19 @@
   vertical-align: top;
 }
 
-.calendar .symbol span {
+.JIR-calendar .symbol span {
   display: inline-block;
   -ms-transform: translate(0, 2px); /* IE 9 */
   -webkit-transform: translate(0, 2px); /* Safari */
   transform: translate(0, 2px);
 }
 
-.calendar .title {
-  padding-left: 0;
+.JIR-calendar .title {
+  padding-left: 5px;
   padding-right: 0;
 }
 
-.calendar .time {
+.JIR-calendar .time {
   padding-left: 30px;
   text-align: right;
   vertical-align: top;
