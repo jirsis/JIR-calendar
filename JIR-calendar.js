@@ -220,9 +220,9 @@ Module.register("JIR-calendar", {
 					if (this.config.timeFormat === "absolute") {
 						if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 							// This event falls within the config.urgency period that the user has set
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay+"wwwwwww";
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay;
 						} else {
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.fullDayEventDateFormat))+", el "+eventDay +"qqqqqq";
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.fullDayEventDateFormat))+", el "+eventDay;
 						}
 					} else {
 						timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay;
@@ -234,10 +234,10 @@ Module.register("JIR-calendar", {
 						// This event is within the next 48 hours (2 days)
 						if (event.startDate - now < this.config.getRelative * oneHour) {
 							// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", a las "+eventHour+"--------";
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", a las "+eventHour;
 						} else {
 							// Otherwise just say 'Today/Tomorrow at such-n-such time'						
-							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format("[este] ddd D [de] MMM [a las] HH[:]mm"))+"xxxxxxx";
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format("[este] ddd D [de] MMM [a las] HH[:]mm"));
 						}
 					} else {
 						/* Check to see if the user displays absolute or relative dates with their events
@@ -250,9 +250,9 @@ Module.register("JIR-calendar", {
 						if (this.config.timeFormat === "absolute") {
 							if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
 								// This event falls within the config.urgency period that the user has set
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay+" a las "+eventHour+"eeeeeee";
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+", el "+eventDay+" a las "+eventHour;
 							} else {
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat))+" "+eventDay+" a las "+eventHour+"rrrrrr";
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat))+" "+eventDay+" a las "+eventHour;
 							}
 						} else {
 							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow())+ " a las "+eventHour;
