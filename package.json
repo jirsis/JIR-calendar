@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/jirsis/JIR-calendar/issues"
   },
-  "homepage": "https://github.com/jirsis/JIR-calendar#readme"
+  "homepage": "https://github.com/jirsis/JIR-calendar#readme",
+  "dependencies": {
+    "valid-url": "^1.0.9"
+  }
 }
