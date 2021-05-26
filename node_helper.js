@@ -53,6 +53,7 @@ module.exports = NodeHelper.create({
 				//console.log('Broadcast events.');
 				//console.log(fetcher.events());
 
+				
 				self.sendSocketNotification("CALENDAR_EVENTS", {
 					url: fetcher.url(),
 					events: fetcher.events()

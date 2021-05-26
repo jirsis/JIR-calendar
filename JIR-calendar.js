@@ -227,6 +227,7 @@ Module.register("JIR-calendar", {
 						}
 					} else {
 						timeWrapper.innerHTML = this.config.debug?"gggg":this.capFirst(moment(event.startDate, "x").add(1, 'day').fromNow())+", el "+eventDay;
+						timeWrapper.innerHTML = timeWrapper.innerHTML.replace(' días', 'd');
 					}
 				}
 			} else {
@@ -238,7 +239,7 @@ Module.register("JIR-calendar", {
 							timeWrapper.innerHTML = this.config.debug?"hhhh":this.capFirst(moment(event.startDate, "x").fromNow())+", a las "+eventHour;
 						} else {
 							// Otherwise just say 'Today/Tomorrow at such-n-such time'						
-							timeWrapper.innerHTML = this.config.debug?"iiii":this.capFirst(moment(event.startDate, "x").format("[este] ddd D [de] MMM [a las] HH[:]mm"));
+							timeWrapper.innerHTML = this.config.debug?"iiii":this.capFirst(moment(event.startDate, "x").format("[este] ddd [a las] HH[:]mm"));
 						}
 					} else {
 						/* Check to see if the user displays absolute or relative dates with their events
@@ -257,6 +258,7 @@ Module.register("JIR-calendar", {
 							}
 						} else {
 							timeWrapper.innerHTML = this.config.debug?"llll":this.capFirst(moment(event.startDate, "x").fromNow())+ " a las "+eventHour;
+							timeWrapper.innerHTML = timeWrapper.innerHTML.replace(' días', 'd');
 						}
 					}
 				} else {
