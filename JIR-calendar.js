@@ -53,8 +53,8 @@ Module.register("JIR-calendar", {
 	// Define required scripts.
 	getScripts: function () {
 		return [
-		"moment.js",
-		'https://use.fontawesome.com/releases/v5.3.1/js/all.js'
+		'moment.js',
+		'https://use.fontawesome.com/releases/v5.6.0/js/all.js'
 		];
 	},
 
